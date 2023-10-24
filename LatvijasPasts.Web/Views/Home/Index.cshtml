@@ -1,0 +1,79 @@
+﻿@using Microsoft.EntityFrameworkCore.Metadata.Internal
+@model CvListViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+<div>
+    <div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    </div>
+
+    @if(Model.CvItems.Any())
+    {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Lastname</th>
+                    <th>Other name</th>
+                    <th>E-mail</th>
+                    <th>Phone number</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var cv in Model.CvItems)
+                {
+                    <tr>
+                        <td>
+                            @cv.Id
+                        </td>
+                        <td>
+                            @cv.Name
+                        </td>
+                         <td>
+                            @cv.LastName
+                        </td>
+                        <td>
+                            @cv.OtherName
+                        </td>
+                        <td>
+                            @cv.Email
+                        </td>
+                        <td>
+                            @cv.PhoneNumber
+                        </td>
+                        <td>
+                            @using (Html.BeginForm("Delete", "Home", FormMethod.Post))
+                            {
+                                <input type="hidden" name="id" value="@cv.Id" />
+                                <input id="Submit" type="submit" value="Delete" class="btn btn-danger" />
+                            }
+                        </td>
+                        <td>
+                            @using (Html.BeginForm("Edit", "Home", FormMethod.Get))
+                            {
+                                <input type="hidden" name="id" value="@cv.Id" />
+                                <input id="Submit" type="submit" value="Edit" class="btn btn-info" />
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    }
+
+    else
+    {
+        <div>
+            <span class="alert alert-warning ">No items found</span>
+        </div>
+
+    }
+    @Html.ActionLink("Create", "Create", new {}, new {@class="btn btn-primary"})
+  
+</div>
+
