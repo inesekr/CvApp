@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using LatvijasPasts.Core.Enums;
+using CvApp.Core.Enums;
 
-namespace LatvijasPasts.Core.Models
+namespace CvApp.Core.Models
 {
     public class LanguageKnowledge : Entity
     {

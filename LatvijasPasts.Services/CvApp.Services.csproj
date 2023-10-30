@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\LatvijasPasts.Core\LatvijasPasts.Core.csproj" />
-    <ProjectReference Include="..\LatvijasPasts.Data\LatvijasPasts.Data.csproj" />
+    <ProjectReference Include="..\LatvijasPasts.Core\CvApp.Core.csproj" />
+    <ProjectReference Include="..\LatvijasPasts.Data\CvApp.Data.csproj" />
   </ItemGroup>
 
 </Project>

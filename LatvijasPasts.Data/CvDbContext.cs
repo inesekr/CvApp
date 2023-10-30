@@ -1,7 +1,7 @@
-﻿using LatvijasPasts.Core.Models;
+﻿using CvApp.Core.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace LatvijasPasts.Data
+namespace CvApp.Data
 {
     public class CvDbContext : DbContext
     {

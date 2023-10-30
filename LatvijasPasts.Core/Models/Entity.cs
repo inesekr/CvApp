@@ -1,4 +1,4 @@
-﻿namespace LatvijasPasts.Core.Models
+﻿namespace CvApp.Core.Models
 {
     public abstract class Entity
     {

@@ -1,6 +1,6 @@
-﻿using LatvijasPasts.Core.Models;
+﻿using CvApp.Core.Models;
 
-namespace LatvijasPasts.Core.Services
+namespace CvApp.Core.Services
 {
     public interface IEntityService<T> where T : Entity
     {

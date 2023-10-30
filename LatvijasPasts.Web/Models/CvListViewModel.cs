@@ -1,4 +1,4 @@
-﻿namespace LatvijasPasts.Web.Models
+﻿namespace CvApp.Web.Models
 {
     public class CvListViewModel
     {

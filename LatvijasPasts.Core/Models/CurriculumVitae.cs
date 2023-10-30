@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace LatvijasPasts.Core.Models
+namespace CvApp.Core.Models
 {
     public class CurriculumVitae : Entity
     {

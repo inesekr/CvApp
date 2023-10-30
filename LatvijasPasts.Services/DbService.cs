@@ -1,8 +1,8 @@
-﻿using LatvijasPasts.Core.Models;
-using LatvijasPasts.Core.Services;
-using LatvijasPasts.Data;
+﻿using CvApp.Core.Models;
+using CvApp.Core.Services;
+using CvApp.Data;
 
-namespace LatvijasPasts.Services
+namespace CvApp.Services
 {
     public class DbService : IDbService
     {

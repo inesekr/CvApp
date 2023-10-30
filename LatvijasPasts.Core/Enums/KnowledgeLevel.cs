@@ -1,4 +1,4 @@
-﻿namespace LatvijasPasts.Core.Enums
+﻿namespace CvApp.Core.Enums
 {
     public enum KnowledgeLevel
     {

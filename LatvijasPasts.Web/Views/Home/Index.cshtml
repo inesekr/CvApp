@@ -15,7 +15,7 @@
             <thead>
                 <tr>
                     <th>Id</th>
-                    <th>Name</th>
+                    <th>FirstName</th>
                     <th>Lastname</th>
                     <th>Other name</th>
                     <th>E-mail</th>
@@ -31,7 +31,7 @@
                             @cv.Id
                         </td>
                         <td>
-                            @cv.Name
+                            @cv.FirstName
                         </td>
                          <td>
                             @cv.LastName
@@ -73,7 +73,7 @@
         </div>
 
     }
-    @Html.ActionLink("Create", "Create", new {}, new {@class="btn btn-primary"})
+    @Html.ActionLink("Create", "Create",new {}, new {@class="btn btn-primary"})
   
 </div>
 

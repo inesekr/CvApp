@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.23" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.23">
       <PrivateAssets>all</PrivateAssets>
@@ -21,9 +22,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\LatvijasPasts.Core\LatvijasPasts.Core.csproj" />
-    <ProjectReference Include="..\LatvijasPasts.Data\LatvijasPasts.Data.csproj" />
-    <ProjectReference Include="..\LatvijasPasts.Services\LatvijasPasts.Services.csproj" />
+    <ProjectReference Include="..\LatvijasPasts.Core\CvApp.Core.csproj" />
+    <ProjectReference Include="..\LatvijasPasts.Data\CvApp.Data.csproj" />
+    <ProjectReference Include="..\LatvijasPasts.Services\CvApp.Services.csproj" />
   </ItemGroup>
 
 </Project>

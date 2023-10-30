@@ -1,10 +1,10 @@
-using LatvijasPasts.Core.Models;
-using LatvijasPasts.Core.Services;
-using LatvijasPasts.Data;
-using LatvijasPasts.Services;
+using CvApp.Core.Models;
+using CvApp.Core.Services;
+using CvApp.Data;
+using CvApp.Services;
 using Microsoft.EntityFrameworkCore;
 
-namespace LatvijasPasts.Web
+namespace CvApp.Web
 {
     public class Program
     {
@@ -17,8 +17,12 @@ namespace LatvijasPasts.Web
 
             builder.Services.AddDbContext<CvDbContext>(options => 
                 options.UseSqlServer(builder.Configuration.GetConnectionString("cvDb")));
+            var mapper = AutoMapperConfig.CreateMapper();
+            builder.Services.AddSingleton(mapper);
+            builder.Services.AddSingleton<ICvValidations, CvEditValidations>();
             builder.Services.AddTransient<IDbService, DbService>();
             builder.Services.AddTransient<IEntityService<CurriculumVitae>, EntityService<CurriculumVitae>>();
+            builder.Services.AddTransient<IEntityService<LanguageKnowledge>, EntityService<LanguageKnowledge>>();
 
             var app = builder.Build();
 
