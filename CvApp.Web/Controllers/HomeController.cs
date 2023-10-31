@@ -19,7 +19,6 @@ namespace CvApp.Web.Controllers
         private readonly ICvValidations _validations;
         public HomeController(ILogger<HomeController> logger, 
             IEntityService<CurriculumVitae> cvService,
-            //IEntityService<LanguageKnowledge> languageService,
             ICvValidations validations,
             IMapper mapper)
         {
@@ -34,24 +33,7 @@ namespace CvApp.Web.Controllers
             var cvs = _cvService.Query().Include(cv => cv.LanguageKnowledges).ToList();
             var cvList = new CvListViewModel();
             cvList.CvItems = cvs.Select(_mapper.Map<CvItemViewModel>).ToList(); 
-            //before using mapper:
-            //cvList.CvItems = cvs.Select(cv => new CvItemViewModel
-            //{
-            //    Email = cv.Email,
-            //    Id = cv.Id,
-            //    FirstName = cv.FirstName,
-            //    LastName = cv.LastName,
-            //    OtherName = cv.OtherName,
-            //    PhoneNumber = cv.PhoneNumber,
-            //    LanguageKnowledge = cv.LanguageKnowledges.Select(l => new LanguageKnowledgeViewModel
-            //    {
-            //        CurriculumVitaeId = cv.Id,
-            //        Id = l.Id,
-            //        Language = l.Language,
-            //        LanguageLevel = l.LanguageLevel
-            //    }).ToList()
-            //}).ToList();
-
+          
             return View(cvList);
         }
 
@@ -76,23 +58,6 @@ namespace CvApp.Web.Controllers
             {
                 var model = _mapper.Map<CvItemViewModel>(cv);
 
-                //before using AutoMapper:
-                //var model = new CvItemViewModel
-                //{
-                //    FirstName = cv.FirstName,
-                //    Email = cv.Email,
-                //    Id = cv.Id,
-                //    LastName = cv.LastName,
-                //    OtherName = cv.OtherName,
-                //    PhoneNumber = cv.PhoneNumber,
-                //    LanguageKnowledge = cv.LanguageKnowledges.Select(l => new LanguageKnowledgeViewModel 
-                //    {
-                //        CurriculumVitaeId = cv.Id,
-                //        Id = l.Id,
-                //        Language = l.Language,
-                //        LanguageLevel = l.LanguageLevel
-                //    }).ToList()
-                //};
                 return View(model);
             }
             return RedirectToAction("Index");
@@ -101,52 +66,12 @@ namespace CvApp.Web.Controllers
         [HttpPost]
         public IActionResult Edit(CvItemViewModel cv)
         {
-
-            //var addedLanguages = cv.LanguageKnowledge.Where(l => l.Id == 0).ToList();
-
-            // And this moved to separate class:
-            //var duplicateLanguages = cv.LanguageKnowledge.Any(l =>
-            //    cv.LanguageKnowledge.Count(ll =>
-            //    ll.Language.ToLowerInvariant() == l.Language.ToLowerInvariant()) > 1);
-
-            //if(!ModelState.IsValid)
-            //{
-            //    return View(cv);
-            //}
-
-            //if(duplicateLanguages)
-            //{
-            //    ModelState.AddModelError("error", "language already exists");
-            //    return View(cv);
-            //}
-
-
-            /*var duplicateLanguages = existingCv.LanguageKnowledges
-                .Any(l => addedLanguages
-                .Any(added =>
-                added.Language.ToLowerInvariant() == l.Language.ToLowerInvariant()));
-            */
-
-            /*var duplicateLanguages = cv.LanguageKnowledge
-                .Where(l =>
-                existingCv.LanguageKnowledges
-                .Any(c => 
-                c.Language.ToLowerInvariant() == l.Language.ToLowerInvariant()));
-            if (duplicateLanguages.Any())
-            {
-                ModelState.AddModelError("error", "language already exists");
-                return View(cv);
-            }
-            */
-
             if (!_validations.IsValid(cv,ModelState))
             {
                 return View(cv);
             }
 
             var existingCv = _cvService.GetById(cv.Id);
-
-            //second variant, mapping all values:
 
             if (existingCv != null)
             {
@@ -155,41 +80,6 @@ namespace CvApp.Web.Controllers
                 _cvService.Update(existingCv);
             }
 
-            // first variant mapping just languages:
-            //if (existingCv != null)
-            //{
-            //    existingCv.FirstName = cv.FirstName;
-            //    existingCv.Email = cv.Email;
-            //    existingCv.Id = cv.Id;
-            //    existingCv.LastName = cv.LastName;
-            //    existingCv.OtherName = cv.OtherName;
-            //    existingCv.PhoneNumber = cv.PhoneNumber;
-            //    existingCv.LanguageKnowledges = cv.LanguageKnowledge
-            //        .Where(l => l.Id == 0)
-            //        .Select(_mapper.Map<LanguageKnowledge>)
-            //        .ToList();
-
-            //    _cvService.Update(existingCv);
-            //}
-
-            // before using AutoMapper:
-            //if(existingCv != null)
-            //{
-            //    existingCv.FirstName = cv.FirstName;
-            //    existingCv.Email = cv.Email;
-            //    existingCv.Id = cv.Id;
-            //    existingCv.LastName = cv.LastName;
-            //    existingCv.OtherName = cv.OtherName;
-            //    existingCv.PhoneNumber = cv.PhoneNumber;
-            //    existingCv.LanguageKnowledges = cv.LanguageKnowledge.Where(l => l.Id==0).Select(l => new LanguageKnowledge
-            //    {
-            //        Id = l.Id,
-            //        Language = l.Language,
-            //        LanguageLevel = l.LanguageLevel,
-            //        CurriculumVitaeId = cv.Id
-            //    }).ToList();
-            //    _cvService.Update(existingCv);
-            //}
             return RedirectToAction("Index");
         }
 
@@ -213,17 +103,7 @@ namespace CvApp.Web.Controllers
         [HttpPost]
         public IActionResult Create(CvItemViewModel cv)
         {
-            //_cvService.Create(new CurriculumVitae
-            //{
-            //    Email = cv.Email,
-            //    FirstName = cv.FirstName,
-            //    LastName = cv.LastName,
-            //    OtherName = cv.OtherName,
-            //    PhoneNumber = cv.PhoneNumber
-
-            //});
-
-            _cvService.Create(_mapper.Map<CurriculumVitae>(cv));
+           _cvService.Create(_mapper.Map<CurriculumVitae>(cv));
             return RedirectToAction("Index");
         }
 
