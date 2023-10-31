@@ -1,0 +1,46 @@
+﻿@using CvApp.Core.Enums;
+@model CvItemViewModel
+
+@{
+    ViewBag.Title = $"Edit{Model.FirstName} CV";
+    Layout = "_Layout";
+}
+<h2>Edit</h2>
+
+@using (Html.BeginForm("Edit", "Home", FormMethod.Post))
+{
+    @Html.EditorFor(m=> m, "CvEdit")
+    @Html.EditorFor(m => m.LanguageKnowledge, "LanguageListEdit")
+   
+    <div class="btn-group" role="group">
+        <button id="add-language-item" type="button" class="btn btn-success">Add language item</button>
+        <button type="submit" class="btn btn-primary">Update</button>
+    </div>
+   
+}
+
+@section Scripts
+{
+    <script>
+        $(document).ready(function(){
+            $('#add-language-item').on("click", function () {
+                const itemCount = $('#language-section').find("div.mb-3").length / 2;
+                console.log(itemCount);
+
+                $.get(`/Language/AddLanguageSectionItem?itemCount=${itemCount}`, function (data, status) {
+                    $('#language-section').append(data)
+                });
+            })
+
+            $("#language-section").on("click", ".delete-language", function () {
+                const id = $(this).attr('id');
+                //console.log(id);
+                $.post('/Language/DeleteLanguageItem', { "id" : id }, function (data, status) {
+                    console.log(status);
+                    window.location.reload();
+                });
+            })
+        })
+    </script>
+}
+

@@ -1,0 +1,30 @@
+﻿@using CvApp.Core.Enums;
+@model CvItemViewModel
+
+@{
+    var display = @ViewData.ModelState.IsValid ? "none" : "block";
+}
+
+@Html.ValidationSummary(htmlAttributes: new {@class = "alert alert-danger",  style=$"display:{display}"}, message: "Errors found")
+
+@Html.HiddenFor(m => m.Id)
+<div>
+    @Html.LabelFor(m => m.FirstName, "Name")
+    @Html.TextBoxFor(m => m.FirstName, new {@class = "form-control" })
+</div>
+<div>
+    @Html.LabelFor(m => m.LastName, "Lastname")
+    @Html.TextBoxFor(m => m.LastName, new {@class = "form-control" })
+</div>
+<div>
+    @Html.LabelFor(m => m.OtherName, "Other name")
+    @Html.TextBoxFor(m => m.OtherName, new {@class = "form-control" })
+</div>
+<div class="mb-3">
+    @Html.LabelFor(m => m.Email, "E-mail")
+    @Html.TextBoxFor(m => m.Email, new {@class = "form-control" })
+</div>
+<div class="mb-3">
+    @Html.LabelFor(m => m.PhoneNumber, "Phone number")
+    @Html.TextBoxFor(m => m.PhoneNumber, new {@class = "form-control" })
+</div>
