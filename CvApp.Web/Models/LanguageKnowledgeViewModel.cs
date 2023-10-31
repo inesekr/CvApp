@@ -1,5 +1,4 @@
 ﻿using CvApp.Core.Enums;
-using CvApp.Core.Models;
 using System.ComponentModel.DataAnnotations;
 
 namespace CvApp.Web.Models

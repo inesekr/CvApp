@@ -1,0 +1,49 @@
+﻿@model CvApp.Web.Models.CvItemViewModel
+
+@{
+    ViewData["Title"] = "Display";
+}
+
+<h1>Display full CV</h1>
+
+<h4>CvItemViewModel</h4>
+<hr />
+<div>
+    <h2>General information</h2>
+    <p><strong>Name:</strong> @Model.FirstName</p>
+    <p><strong>Last Name:</strong> @Model.LastName</p>
+    <p>Other Name: @Model.OtherName</p>
+    <p>Email: @Model.Email</p>
+    <p>Phone number: @Model.PhoneNumber</p>
+    <br />
+
+    <h2>Languages</h2>
+    <ul>
+        @foreach (var language in Model.LanguageKnowledge)
+        {
+            <li>
+                <strong>Language:</strong> @language.Language<br />
+                <strong>Level:</strong> @language.LanguageLevel
+            </li>
+        }
+    </ul>
+    <br />
+
+    <h2>Education</h2>
+    <ul>
+        @foreach (var education in Model.Education)
+        {
+            <li>
+                <strong>University:</strong> @education.UniversityName<br />
+                <strong>Faculty:</strong> @education.Faculty<br />
+                <strong>Profile:</strong> @education.Profile<br />
+                <strong>Degree:</strong> @education.Degree<br />
+                <strong>Status:</strong> @education.StudyStatus
+            </li>
+        }
+    </ul>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List/ Close</a>
+</div>

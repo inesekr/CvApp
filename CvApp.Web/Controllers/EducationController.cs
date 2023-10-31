@@ -2,7 +2,6 @@
 using CvApp.Core.Services;
 using CvApp.Web.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.Host;
 
 namespace CvApp.Web.Controllers
 {
@@ -34,7 +33,6 @@ namespace CvApp.Web.Controllers
             }
             return Ok();
         }
-
     }
 }
 

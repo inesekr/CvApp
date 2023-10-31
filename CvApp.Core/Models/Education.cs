@@ -13,6 +13,5 @@ namespace CvApp.Core.Models
         public StudyActualState StudyStatus { get; set; }
         public int CurriculumVitaeId { get; set; }
         public CurriculumVitae CurriculumVitae { get; set; }
-
     }
  }

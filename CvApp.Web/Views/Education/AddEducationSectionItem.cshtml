@@ -22,7 +22,6 @@
 			<option value="">Please select</option>
 		</select>
 	</div>
-
 	<div class="mb-3">
 		@Html.LabelFor(m => m.Education, "Status")
 		<select asp-for="@Model.Education[Model.Education.Count -1].StudyStatus" asp-items="Html.GetEnumSelectList<StudyActualState>()">

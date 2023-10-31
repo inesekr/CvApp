@@ -7,5 +7,4 @@ namespace CvApp.Web
     {
         bool IsValid(CvItemViewModel cv, ModelStateDictionary modelState);
     }
-
 }

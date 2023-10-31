@@ -1,6 +1,4 @@
 ﻿using CvApp.Core.Enums;
-using CvApp.Core.Models;
-using System.ComponentModel.DataAnnotations;
 
 namespace CvApp.Web.Models
 {
@@ -14,7 +12,5 @@ namespace CvApp.Web.Models
         public EducationLevel Degree { get; set; }
         public StudyActualState StudyStatus { get; set; }
         public int CurriculumVitaeId { get; set; }
-       
     }
- 
 }

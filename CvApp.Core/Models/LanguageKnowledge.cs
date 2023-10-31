@@ -9,7 +9,6 @@ namespace CvApp.Core.Models
         public string? Language { get; set; }
         public KnowledgeLevel LanguageLevel { get; set; }
         public int CurriculumVitaeId { get; set; }
-        public CurriculumVitae CurriculumVitae { get; set; }    
-
+        public CurriculumVitae CurriculumVitae { get; set; }   
     }
 }

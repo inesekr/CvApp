@@ -1,12 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using CvApp.Core.Models;
 using CvApp.Core.Services;
-using CvApp.Services;
 using CvApp.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using NuGet.Protocol;
 using AutoMapper;
 
 namespace CvApp.Web.Controllers
@@ -17,6 +14,7 @@ namespace CvApp.Web.Controllers
         private readonly IEntityService<CurriculumVitae> _cvService;
         private readonly IMapper _mapper;
         private readonly ICvValidations _validations;
+
         public HomeController(ILogger<HomeController> logger, 
             IEntityService<CurriculumVitae> cvService,
             ICvValidations validations,
@@ -27,15 +25,6 @@ namespace CvApp.Web.Controllers
             _mapper = mapper;
             _validations = validations;
         }
-
-        //public IActionResult Index()
-        //{
-        //    var cvs = _cvService.Query().Include(cv => cv.LanguageKnowledges).ToList();
-        //    var cvList = new CvListViewModel();
-        //    cvList.CvItems = cvs.Select(_mapper.Map<CvItemViewModel>).ToList(); 
-          
-        //    return View(cvList);
-        //}
 
         public IActionResult Index()
         {
@@ -58,23 +47,9 @@ namespace CvApp.Web.Controllers
             {
                 _cvService.Delete(cv);
             }
+
             return RedirectToAction("Index");
         }
-
-        //[HttpGet]
-        //public IActionResult Edit(int id)
-        //{
-        //    var cv = _cvService.QueryById(id)
-        //        .Include(cv => cv.LanguageKnowledges)
-        //        .SingleOrDefault();
-        //    if (cv != null)
-        //    {
-        //        var model = _mapper.Map<CvItemViewModel>(cv);
-
-        //        return View(model);
-        //    }
-        //    return RedirectToAction("Index");
-        //}
 
         [HttpGet]
         public IActionResult Edit(int id)
@@ -88,6 +63,7 @@ namespace CvApp.Web.Controllers
                 var model = _mapper.Map<CvItemViewModel>(cv);
                 return View(model);
             }
+
             return RedirectToAction("Index");
         }
 
@@ -111,25 +87,22 @@ namespace CvApp.Web.Controllers
             return RedirectToAction("Index");
         }
 
-        //[HttpGet]
-        //public IActionResult AddLanguageSectionItem(int itemCount)
-        //{
-        //    var model = new CvItemViewModel
-        //    {
-        //        LanguageKnowledge = Enumerable.Repeat(new LanguageKnowledgeViewModel(), itemCount+1).ToList()
-        //    };
-        //    return PartialView(model);
-        //}
+        [HttpGet]
+        public IActionResult Display(int id)
+        {
+            var cvToDisplay = _cvService.QueryById(id)
+                .Include(cv => cv.LanguageKnowledges)
+                .Include(cv => cv.Education)
+                .SingleOrDefault();
 
-        //[HttpGet]
-        //public IActionResult AddEducationSectionItem(int itemCount)
-        //{
-        //    var model = new CvItemViewModel
-        //    {
-        //        Education = Enumerable.Repeat(new EducationViewModel(), itemCount + 1).ToList()
-        //    };
-        //    return PartialView(model);
-        //}
+            if (cvToDisplay != null)
+            {
+                var model = _mapper.Map<CvItemViewModel>(cvToDisplay);
+                return View(model);
+            }
+
+            return RedirectToAction("Index");
+        }
 
         [HttpGet]
         public IActionResult Create()

@@ -7,12 +7,10 @@ namespace CvApp.Data
     {
         public CvDbContext(DbContextOptions<CvDbContext> options):base(options)
         {
-            
         }
 
         DbSet<CurriculumVitae> CurriculumVitae { get; set; }
         DbSet<LanguageKnowledge> LanguageKnowledges { get; set; }   
         DbSet<Education> Education { get; set; }
-
     }
 }

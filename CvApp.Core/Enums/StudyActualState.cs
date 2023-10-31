@@ -1,6 +1,4 @@
-﻿
-
-namespace CvApp.Core.Enums
+﻿namespace CvApp.Core.Enums
 {
     public enum StudyActualState
     {

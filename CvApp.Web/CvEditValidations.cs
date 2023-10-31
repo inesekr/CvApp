@@ -7,7 +7,6 @@ namespace CvApp.Web
     {
         public bool IsValid(CvItemViewModel cv, ModelStateDictionary modelState)
         {
-           
             if (!modelState.IsValid)
             {
                 return false;
@@ -22,8 +21,8 @@ namespace CvApp.Web
                 modelState.AddModelError("error", "language already exists");
                 return false;
             }
+
             return true;
         }
     }
-
 }

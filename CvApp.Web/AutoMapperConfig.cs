@@ -21,8 +21,6 @@ namespace CvApp.Web
                 cfg.CreateMap<LanguageKnowledge, LanguageKnowledgeViewModel>();
                 cfg.CreateMap<LanguageKnowledgeViewModel, LanguageKnowledge> ()
                     .ForMember(c => c.CurriculumVitae, opt => opt.Ignore());
-
-               
                
                 cfg.CreateMap<Education, EducationViewModel>();
                 cfg.CreateMap<EducationViewModel, Education>()

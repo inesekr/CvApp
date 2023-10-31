@@ -2,7 +2,6 @@
 using CvApp.Core.Services;
 using CvApp.Web.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.Host;
 
 namespace CvApp.Web.Controllers
 {
@@ -15,7 +14,6 @@ namespace CvApp.Web.Controllers
             _languageService = languageService;
         }
 
-
         [HttpGet]
         public IActionResult AddLanguageSectionItem(int itemCount)
         {
@@ -23,6 +21,7 @@ namespace CvApp.Web.Controllers
             {
                 LanguageKnowledge = Enumerable.Repeat(new LanguageKnowledgeViewModel(), itemCount + 1).ToList()
             };
+
             return PartialView(model);
         }
 
@@ -34,9 +33,8 @@ namespace CvApp.Web.Controllers
             {
                 _languageService.Delete(languageKnowledge);
             }
+
             return Ok();
         }
-
-
     }
 }
