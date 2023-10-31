@@ -3,6 +3,7 @@ using CvApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CvApp.Data.Migrations
 {
     [DbContext(typeof(CvDbContext))]
-    partial class CvDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231031131131_addedEducationSection")]
+    partial class addedEducationSection
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -65,7 +67,7 @@ namespace CvApp.Data.Migrations
                     b.Property<int>("CurriculumVitaeId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Degree")
+                    b.Property<int>("EducationGrade")
                         .HasColumnType("int");
 
                     b.Property<string>("Faculty")
@@ -76,7 +78,7 @@ namespace CvApp.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("StudyStatus")
+                    b.Property<int>("StudyActualState")
                         .HasColumnType("int");
 
                     b.Property<string>("UniversityName")
@@ -118,7 +120,7 @@ namespace CvApp.Data.Migrations
             modelBuilder.Entity("CvApp.Core.Models.Education", b =>
                 {
                     b.HasOne("CvApp.Core.Models.CurriculumVitae", "CurriculumVitae")
-                        .WithMany("Education")
+                        .WithMany()
                         .HasForeignKey("CurriculumVitaeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -139,8 +141,6 @@ namespace CvApp.Data.Migrations
 
             modelBuilder.Entity("CvApp.Core.Models.CurriculumVitae", b =>
                 {
-                    b.Navigation("Education");
-
                     b.Navigation("LanguageKnowledges");
                 });
 #pragma warning restore 612, 618

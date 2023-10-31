@@ -11,6 +11,8 @@ namespace CvApp.Data
         }
 
         DbSet<CurriculumVitae> CurriculumVitae { get; set; }
-        DbSet<LanguageKnowledge> LanguageKnowledges { get; set; }    
+        DbSet<LanguageKnowledge> LanguageKnowledges { get; set; }   
+        DbSet<Education> Education { get; set; }
+
     }
 }

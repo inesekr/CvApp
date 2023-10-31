@@ -28,12 +28,25 @@ namespace CvApp.Web.Controllers
             _validations = validations;
         }
 
+        //public IActionResult Index()
+        //{
+        //    var cvs = _cvService.Query().Include(cv => cv.LanguageKnowledges).ToList();
+        //    var cvList = new CvListViewModel();
+        //    cvList.CvItems = cvs.Select(_mapper.Map<CvItemViewModel>).ToList(); 
+          
+        //    return View(cvList);
+        //}
+
         public IActionResult Index()
         {
-            var cvs = _cvService.Query().Include(cv => cv.LanguageKnowledges).ToList();
+            var cvs = _cvService.Query()
+                .Include(cv => cv.LanguageKnowledges)
+                .Include(cv => cv.Education) 
+                .ToList();
+
             var cvList = new CvListViewModel();
-            cvList.CvItems = cvs.Select(_mapper.Map<CvItemViewModel>).ToList(); 
-          
+            cvList.CvItems = cvs.Select(_mapper.Map<CvItemViewModel>).ToList();
+
             return View(cvList);
         }
 
@@ -48,16 +61,31 @@ namespace CvApp.Web.Controllers
             return RedirectToAction("Index");
         }
 
+        //[HttpGet]
+        //public IActionResult Edit(int id)
+        //{
+        //    var cv = _cvService.QueryById(id)
+        //        .Include(cv => cv.LanguageKnowledges)
+        //        .SingleOrDefault();
+        //    if (cv != null)
+        //    {
+        //        var model = _mapper.Map<CvItemViewModel>(cv);
+
+        //        return View(model);
+        //    }
+        //    return RedirectToAction("Index");
+        //}
+
         [HttpGet]
         public IActionResult Edit(int id)
         {
             var cv = _cvService.QueryById(id)
                 .Include(cv => cv.LanguageKnowledges)
+                .Include(cv => cv.Education)  
                 .SingleOrDefault();
             if (cv != null)
             {
                 var model = _mapper.Map<CvItemViewModel>(cv);
-
                 return View(model);
             }
             return RedirectToAction("Index");
@@ -83,16 +111,25 @@ namespace CvApp.Web.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpGet]
-        public IActionResult AddLanguageSectionItem(int itemCount)
-        {
-            var model = new CvItemViewModel
-            {
-                LanguageKnowledge = Enumerable.Repeat(new LanguageKnowledgeViewModel(), itemCount+1).ToList()
-            };
-            return PartialView(model);
-        }
+        //[HttpGet]
+        //public IActionResult AddLanguageSectionItem(int itemCount)
+        //{
+        //    var model = new CvItemViewModel
+        //    {
+        //        LanguageKnowledge = Enumerable.Repeat(new LanguageKnowledgeViewModel(), itemCount+1).ToList()
+        //    };
+        //    return PartialView(model);
+        //}
 
+        //[HttpGet]
+        //public IActionResult AddEducationSectionItem(int itemCount)
+        //{
+        //    var model = new CvItemViewModel
+        //    {
+        //        Education = Enumerable.Repeat(new EducationViewModel(), itemCount + 1).ToList()
+        //    };
+        //    return PartialView(model);
+        //}
 
         [HttpGet]
         public IActionResult Create()

@@ -9,8 +9,8 @@ namespace CvApp.Core.Models
         public string? UniversityName { get; set; }
         public string Faculty { get; set; }
         public string Profile {  get; set; }
-        public EducationLevel  EducationGrade { get; set; }
-        public StudyStatus StudyActualState { get; set; }
+        public EducationLevel  Degree { get; set; }
+        public StudyActualState StudyStatus { get; set; }
         public int CurriculumVitaeId { get; set; }
         public CurriculumVitae CurriculumVitae { get; set; }
 
