@@ -11,9 +11,11 @@
 {
     @Html.EditorFor(m=> m, "CvEdit")
     @Html.EditorFor(m => m.LanguageKnowledge, "LanguageListEdit")
+    @Html.EditorFor(m => m.Education, "EducationListEdit")
    
     <div class="btn-group" role="group">
         <button id="add-language-item" type="button" class="btn btn-success">Add language item</button>
+        <button id="add-education-item" type="button" class="btn btn-success">Add education item</button>
         <button type="submit" class="btn btn-primary">Update</button>
     </div>
    
@@ -25,7 +27,6 @@
         $(document).ready(function(){
             $('#add-language-item').on("click", function () {
                 const itemCount = $('#language-section').find("div.mb-3").length / 2;
-                console.log(itemCount);
 
                 $.get(`/Language/AddLanguageSectionItem?itemCount=${itemCount}`, function (data, status) {
                     $('#language-section').append(data)
@@ -34,8 +35,26 @@
 
             $("#language-section").on("click", ".delete-language", function () {
                 const id = $(this).attr('id');
-                //console.log(id);
+
                 $.post('/Language/DeleteLanguageItem', { "id" : id }, function (data, status) {
+                    console.log(status);
+                    window.location.reload();
+                });
+            })
+
+            $('#add-education-item').on("click", function () {
+                const itemCount = $('#education-section').find("div.mb-3").length / 5;
+                console.log(itemCount);
+
+                $.get(`/Education/AddEducationSectionItem?itemCount=${itemCount}`, function (data, status) {
+                    $('#education-section').append(data)
+                });
+            })
+
+            $("#education-section").on("click", ".delete-education", function () {
+                const id = $(this).attr('id');
+                
+                $.post('/Education/DeleteEducationItem', { "id": id }, function (data, status) {
                     console.log(status);
                     window.location.reload();
                 });
@@ -43,4 +62,3 @@
         })
     </script>
 }
-

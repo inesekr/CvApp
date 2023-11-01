@@ -1,0 +1,32 @@
+﻿@using CvApp.Core.Enums
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model CvItemViewModel
+
+<div>
+	@Html.HiddenFor(m => m.Education[Model.Education.Count -1].Id)
+	<div class="mb-3">
+		@Html.LabelFor(m => m.Education[Model.Education.Count -1].UniversityName)
+		@Html.TextBoxFor(m => m.Education[Model.Education.Count -1].UniversityName)
+	</div>
+	<div class="mb-3">
+		@Html.LabelFor(m => m.Education[Model.Education.Count -1].Faculty)
+		@Html.TextBoxFor(m => m.Education[Model.Education.Count -1].Faculty)
+	</div>
+	<div class="mb-3">
+		@Html.LabelFor(m => m.Education[Model.Education.Count -1].Profile)
+		@Html.TextBoxFor(m => m.Education[Model.Education.Count -1].Profile)
+	</div>
+	<div class="mb-3">
+		@Html.LabelFor(m => m.Education, "Degree")
+		<select asp-for="@Model.Education[Model.Education.Count -1].Degree" asp-items="Html.GetEnumSelectList<EducationLevel>()">
+			<option value="">Please select</option>
+		</select>
+	</div>
+	<div class="mb-3">
+		@Html.LabelFor(m => m.Education, "Status")
+		<select asp-for="@Model.Education[Model.Education.Count -1].StudyStatus" asp-items="Html.GetEnumSelectList<StudyActualState>()">
+			<option value="">Please select</option>
+		</select>
+		<button type="button" id="@Model.Education[Model.Education.Count -1].Id" class="btn btn-danger delete-education">Remove</button>
+	</div>
+</div>

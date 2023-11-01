@@ -1,5 +1,4 @@
-﻿//using Microsoft.Build.Framework;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace CvApp.Web.Models
 {
@@ -16,6 +15,6 @@ namespace CvApp.Web.Models
         [Required]
         public string? PhoneNumber {  get; set; }
         public List<LanguageKnowledgeViewModel> LanguageKnowledge { get; set; } = new List<LanguageKnowledgeViewModel>();
-
+        public List<EducationViewModel> Education { get; set; } = new List<EducationViewModel>();
     }
 }

@@ -15,5 +15,6 @@ namespace CvApp.Core.Models
         [MaxLength(50)]
         public string? Email { get; set; }
         public ICollection<LanguageKnowledge> LanguageKnowledges { get; set; } = new List<LanguageKnowledge>();
+        public ICollection<Education> Education { get; set; } = new List<Education>();
     }
 }

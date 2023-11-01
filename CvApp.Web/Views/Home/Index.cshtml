@@ -59,10 +59,16 @@
                                 <input id="Submit" type="submit" value="Edit" class="btn btn-info" />
                             }
                         </td>
+                        <td>
+                            @using (Html.BeginForm("Display", "Home", FormMethod.Get))
+                            {
+                                <input type="hidden" name="id" value="@cv.Id" />
+                                <input id="Submit" type="submit" value="Display" class="btn btn-primary" />
+                            }
+                        </td>
                     </tr>
                 }
             </tbody>
-
         </table>
     }
 
@@ -71,9 +77,7 @@
         <div>
             <span class="alert alert-warning ">No items found</span>
         </div>
-
     }
     @Html.ActionLink("Create", "Create",new {}, new {@class="btn btn-primary"})
   
 </div>
-

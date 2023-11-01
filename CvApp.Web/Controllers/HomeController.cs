@@ -1,12 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using CvApp.Core.Models;
 using CvApp.Core.Services;
-using CvApp.Services;
 using CvApp.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using NuGet.Protocol;
 using AutoMapper;
 
 namespace CvApp.Web.Controllers
@@ -17,6 +14,7 @@ namespace CvApp.Web.Controllers
         private readonly IEntityService<CurriculumVitae> _cvService;
         private readonly IMapper _mapper;
         private readonly ICvValidations _validations;
+
         public HomeController(ILogger<HomeController> logger, 
             IEntityService<CurriculumVitae> cvService,
             ICvValidations validations,
@@ -30,10 +28,14 @@ namespace CvApp.Web.Controllers
 
         public IActionResult Index()
         {
-            var cvs = _cvService.Query().Include(cv => cv.LanguageKnowledges).ToList();
+            var cvs = _cvService.Query()
+                .Include(cv => cv.LanguageKnowledges)
+                .Include(cv => cv.Education) 
+                .ToList();
+
             var cvList = new CvListViewModel();
-            cvList.CvItems = cvs.Select(_mapper.Map<CvItemViewModel>).ToList(); 
-          
+            cvList.CvItems = cvs.Select(_mapper.Map<CvItemViewModel>).ToList();
+
             return View(cvList);
         }
 
@@ -45,6 +47,7 @@ namespace CvApp.Web.Controllers
             {
                 _cvService.Delete(cv);
             }
+
             return RedirectToAction("Index");
         }
 
@@ -53,13 +56,14 @@ namespace CvApp.Web.Controllers
         {
             var cv = _cvService.QueryById(id)
                 .Include(cv => cv.LanguageKnowledges)
+                .Include(cv => cv.Education)  
                 .SingleOrDefault();
             if (cv != null)
             {
                 var model = _mapper.Map<CvItemViewModel>(cv);
-
                 return View(model);
             }
+
             return RedirectToAction("Index");
         }
 
@@ -84,15 +88,21 @@ namespace CvApp.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult AddLanguageSectionItem(int itemCount)
+        public IActionResult Display(int id)
         {
-            var model = new CvItemViewModel
-            {
-                LanguageKnowledge = Enumerable.Repeat(new LanguageKnowledgeViewModel(), itemCount+1).ToList()
-            };
-            return PartialView(model);
-        }
+            var cvToDisplay = _cvService.QueryById(id)
+                .Include(cv => cv.LanguageKnowledges)
+                .Include(cv => cv.Education)
+                .SingleOrDefault();
 
+            if (cvToDisplay != null)
+            {
+                var model = _mapper.Map<CvItemViewModel>(cvToDisplay);
+                return View(model);
+            }
+
+            return RedirectToAction("Index");
+        }
 
         [HttpGet]
         public IActionResult Create()
