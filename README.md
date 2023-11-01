@@ -22,5 +22,3 @@ Visual Studio
   - update-database
 --> Try to run project, should open on your localhost
 ---
-###Final result
-![index page](C:\Users\inese\OneDrive\Documents\MY\IT\CODELEX\CvApp.indexPage.png)
