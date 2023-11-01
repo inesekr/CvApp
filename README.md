@@ -5,7 +5,7 @@
 #### It contains now 3 sections - genral info, languages and education (more sections can be added for real-life usage).
 ---
 ### Technologies used
-#### C# ASP.NET Core WEB App (Model-View-Controller), .Net version 6.0., including Razor pages
+#### C# ASP.NET Core WEB App (Model-View-Controller), .Net version 6.0.
 #### EntityFramework used for storing data in DB using Azure Data Studio.
 ---
 ### Prerequisites
