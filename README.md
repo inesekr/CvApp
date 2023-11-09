@@ -17,7 +17,7 @@
 * Install necessary dependencies (e.g.NuGet packages) if any missing
 * Configure the connection string to connect your application to the Azure Data Studio database (in appsettings.json file)
 * Run following commands for migrations in Package Manager Console (choose CvApp.Data as default project):<br>
-  ` addd-migration Init ` <br>
+  ` add-migration Init ` <br>
   ` update-database `
 * Try to run project, should open on your localhost
 ---
